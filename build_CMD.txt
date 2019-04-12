@@ -1,0 +1,36 @@
+使用以下命令克隆此repo，或者将其分叉以用于您自己的开发
+
+git clone https://github.com/adafruit/Adafruit_nRF52_Bootloader
+cd Adafruit_nRF52_Bootloader
+git submodule update --init --recursive
+
+如何编译和构建
+如果您希望为自己开发bootloader，则应该继续。你必须有一个J-Link可以“擦除”你的设备。
+
+选项1：使用Makefile构建
+先决条件：
+
+ARM GCC
+Nordic的nRF5x命令行工具
+建立：
+
+make BOARD=feather_nrf52832 all combinehex
+使用JLink刷新引导加载程序：
+
+make BOARD=feather_nrf52832 flash
+使用DFU串行通过端口/dev/ttyACM0升级引导加载程序
+
+make BOARD=feather_nrf52832 SERIAL=/dev/ttyACM0 dfu-flash
+要闪存SoftDevice（和芯片擦除）：
+
+make BOARD=feather_nrf52832 sd
+擦除所有闪存：
+
+make BOARD=feather_nrf52832 erase
+
+对于支持的板列表，运行时make不BOARD=：
+
+$ make
+You must provide a BOARD parameter with 'BOARD='
+Supported boards are: feather_nrf52840_express feather_nrf52840_express pca10056
+Makefile:90: *** BOARD not defined.  Stop
